@@ -11,7 +11,7 @@ export default async function Home() {
         <h1 className="text-3xl font-bold">todo app</h1>
         <Addtask/>
       </div>
-      <Todolist/>
+      <Todolist tasks={task}/>
     </main>
   )
 }
