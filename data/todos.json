@@ -4,7 +4,7 @@
             "isDone" : false,
             "id" : "1",
             "text" : "Task 1",
-            "type":"Important"
+            "taskType" : "Important"
         }
     ]
 }

@@ -20,15 +20,15 @@ const Todolist: React.FC<TodolistProps> = ({tasks}) => {
     </thead>
     <tbody>
       {tasks.map(task =>(
-        <tr className="hover">
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
-        </th>
-        <th>{task.id}</th>
-        <td>{task.text}</td>
-        <td>Important</td>
+        <tr className="hover" key={task.id}>
+            <th>
+            <label>
+                <input type="checkbox" className="checkbox" />
+            </label>
+            </th>
+            <th>{task.id}</th>
+            <td>{task.text}</td>
+            <td>{task.taskType}</td>
       </tr>
       ))}
     </tbody>
