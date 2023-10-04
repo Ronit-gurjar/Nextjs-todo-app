@@ -7,7 +7,7 @@ interface TodolistProps{
 
 const Todolist: React.FC<TodolistProps> = ({tasks}) => {
   return (
-    <div className="overflow-x-auto border-white border-2 rounded-2xl p-4 mt-2">
+    <div className="overflow-x-auto border-white border-2 rounded-2xl p-4 mt-8">
   <table className="table">
     {/* head */}
     <thead>
