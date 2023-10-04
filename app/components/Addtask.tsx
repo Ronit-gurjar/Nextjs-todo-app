@@ -3,16 +3,22 @@
 import {AiOutlinePlus} from 'react-icons/ai'
 import Modal from './Modal'
 import {FormEventHandler,useState} from 'react';
+import {addTodo} from '@/api'
 
 const Addtask = () => {
 
   const [modalOpen , setmodalOpen] = useState(false);
-  const [newTaskValue, setnewTaskValue] = useState('');
+  const [newTaskValue, setnewTaskValue] = useState("");
 
-  const handleSubmitNewTodo: FormEventHandler<HTMLFormElement> =(e)=>{
+  const handleSubmitNewTodo: FormEventHandler<HTMLFormElement> = async (e)=>{
     e.preventDefault();
-    console.log("new task created:",newTaskValue);
-    setnewTaskValue('');
+    await addTodo({
+        isDone: false,
+        id: '2',
+        text: newTaskValue
+      });
+    setnewTaskValue("");
+    setmodalOpen(false);
   }
 
   return (
