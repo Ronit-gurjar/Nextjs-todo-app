@@ -15,7 +15,7 @@ const Todolist: React.FC<TodolistProps> = ({tasks}) => {
         <th></th>
         <th></th>
         <th>Task</th>
-        <th>Type</th>
+        
       </tr>
     </thead>
     <tbody>
@@ -28,7 +28,7 @@ const Todolist: React.FC<TodolistProps> = ({tasks}) => {
             </th>
             <th>{task.id}</th>
             <td>{task.text}</td>
-            <td>{task.taskType}</td>
+            
       </tr>
       ))}
     </tbody>
