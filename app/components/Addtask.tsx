@@ -1,8 +1,8 @@
-import React from 'react'
+import {AiOutlinePlus} from 'react-icons/ai'
 
 const Addtask = () => {
   return (
-    <div>Addtask</div>
+    <button className='btn btn-primary w-full'>Add new task<AiOutlinePlus size={20}/></button>
   )
 }
 
