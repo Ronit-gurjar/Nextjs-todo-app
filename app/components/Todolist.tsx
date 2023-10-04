@@ -1,6 +1,11 @@
+import { ITask } from '@/types/task'
 import React from 'react'
 
-const Todolist = () => {
+interface TodolistProps{
+    tasks : ITask[]
+}
+
+const Todolist: React.FC<TodolistProps> = ({tasks}) => {
   return (
     <div className="overflow-x-auto border-white border-2 rounded-2xl p-4 mt-2">
   <table className="table">
@@ -9,48 +14,25 @@ const Todolist = () => {
       <tr>
         <th></th>
         <th></th>
-        <th>Name</th>
-        <th>Job</th>
+        <th>Task</th>
+        <th>Type</th>
         <th>Favorite Color</th>
       </tr>
     </thead>
     <tbody>
-      {/* row 1 */}
-      <tr className="hover">
+      {tasks.map(task =>(
+        <tr className="hover">
         <th>
           <label>
             <input type="checkbox" className="checkbox" />
           </label>
         </th>
-        <th>1</th>
-        <td>Cy Ganderton</td>
+        <th>{task.id}</th>
+        <td>{task.text}</td>
         <td>Quality Control Specialist</td>
         <td>Blue</td>
       </tr>
-      {/* row 2 */}
-      <tr className="hover">
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
-        </th>
-        <th>2</th>
-        <td>Hart Hagerty</td>
-        <td>Desktop Support Technician</td>
-        <td>Purple</td>
-      </tr>
-      {/* row 3 */}
-      <tr className="hover">
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
-        </th>
-        <th>3</th>
-        <td>Brice Swyre</td>
-        <td>Tax Accountant</td>
-        <td>Red</td>
-      </tr>
+      ))}
     </tbody>
   </table>
 </div>
