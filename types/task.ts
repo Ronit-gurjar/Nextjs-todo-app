@@ -1,5 +1,6 @@
 export interface ITask{
     isDone : boolean,
     id : string,
-    text : string
+    text : string,
+    type : string
 }
