@@ -1,8 +1,10 @@
+import { getAllTodos } from "@/api";
 import Addtask from "./components/Addtask";
 import Todolist from "./components/Todolist";
 
 
-export default function Home() {
+export default async function Home() {
+  const task = await getAllTodos();
   return (
     <main className="flex min-h-screen max-w-2xl mx-auto flex-col items-center justify-start mt-4">
       <div className="text-center my-2 flex flex-col gap-2">
