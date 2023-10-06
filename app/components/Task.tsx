@@ -1,22 +1,37 @@
 "use client";
 
 import { ITask } from '@/types/task'
-import React, { useState } from 'react'
+import React, { useState, FormEventHandler} from 'react'
 import Modal from './Modal'
+import { editTodo } from '@/api';
+import { useRouter } from 'next/navigation';
 import {FiEdit} from 'react-icons/fi'
 import {GoTrash} from 'react-icons/go'
+
 
 interface TaskProps{
     task : ITask
 }
 
 const Task: React.FC<TaskProps> = ({task}) => {
+    const router = useRouter();
     const [openModalEdit, setopenModalEdit] = useState<boolean>(false);
     const [openModalDelete, setopenModalDelete] = useState<boolean>(false);
     const [taskToEdit, settaskToEdit] = useState(task.text);
     const [taskToDelete, settaskToDelete] = useState(task.text);
 
-    const handleSubmitEditTodo = () => {}
+    const handleSubmitEditTodo: FormEventHandler<HTMLFormElement> = async (e)=>{
+      e.preventDefault();
+      await editTodo({
+          isDone: false,
+          id: task.id.toString(),
+          text: taskToEdit
+        });
+      settaskToEdit("");
+      setopenModalEdit(false);
+      router.refresh();
+    }
+
     const handleSubmitDeleteTodo = () => {} 
 
   return (
