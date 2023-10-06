@@ -3,7 +3,7 @@
 import { ITask } from '@/types/task'
 import React, { useState, FormEventHandler} from 'react'
 import Modal from './Modal'
-import { editTodo } from '@/api';
+import { deleteTodo, editTodo } from '@/api';
 import { useRouter } from 'next/navigation';
 import {FiEdit} from 'react-icons/fi'
 import {GoTrash} from 'react-icons/go'
@@ -18,7 +18,6 @@ const Task: React.FC<TaskProps> = ({task}) => {
     const [openModalEdit, setopenModalEdit] = useState<boolean>(false);
     const [openModalDelete, setopenModalDelete] = useState<boolean>(false);
     const [taskToEdit, settaskToEdit] = useState(task.text);
-    const [taskToDelete, settaskToDelete] = useState(task.text);
 
     const handleSubmitEditTodo: FormEventHandler<HTMLFormElement> = async (e)=>{
       e.preventDefault();
@@ -32,7 +31,11 @@ const Task: React.FC<TaskProps> = ({task}) => {
       router.refresh();
     }
 
-    const handleSubmitDeleteTodo = () => {} 
+    const handleSubmitDeleteTodo = async(id: string) => {
+      await deleteTodo(id);
+      setopenModalDelete(false);
+      router.refresh();
+    } 
 
   return (
     <tr className="hover" key={task.id}>
@@ -54,15 +57,14 @@ const Task: React.FC<TaskProps> = ({task}) => {
                 </div>
               </form>
               </Modal>
+
               <GoTrash onClick={()=>setopenModalDelete(true)}  className='text-red-600 rounded-lg border-spacing-6 hover:bg-red-700 hover:text-black hover:border-spacing-6' cursor='pointer' size={25}/>
               <Modal modalOpen={openModalDelete} setmodalOpen={setopenModalDelete}>
-              <form onSubmit={handleSubmitDeleteTodo} method="dialog">
-                <h3 className="font-bold text-lg">Delete task</h3>
-                <div className="modal-action">
-                <input value={taskToDelete} onChange={(e)=> settaskToDelete(e.target.value)} type="text" placeholder="Type here" className="input input-bordered input-primary w-full" />
-                <button type="submit" className='btn btn-error'>Confirm</button>
+                <h3 className="font-bold text-lg">Delete task?</h3>
+                <div className="modal-action justify-around">
+                  <p className='text-lg '>The task {task.text} will be deleted</p>
+                <button onClick={()=> handleSubmitDeleteTodo(task.id)} type="submit" className='btn btn-error'>Confirm</button>
                 </div>
-              </form>
               </Modal>
             </td>
       </tr>
