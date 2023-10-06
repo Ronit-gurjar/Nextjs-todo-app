@@ -1,8 +1,6 @@
 import { ITask } from '@/types/task'
-import React, { useState } from 'react'
-import Modal from './Modal'
-import {FiEdit} from 'react-icons/fi'
-import {GoTrash} from 'react-icons/go'
+import React from 'react'
+import { FiSettings} from 'react-icons/fi'
 import Task from './Task'
 
 interface TodolistProps{
@@ -19,8 +17,8 @@ const Todolist: React.FC<TodolistProps> = ({tasks}) => {
       <tr>
         <th></th>
         <th></th>
-        <th>Task</th>
-        <th></th>
+        <th className='text-lg'>Task</th>
+        <th className='flex flex-col justify-center items-center'><FiSettings size={25}/></th>
       </tr>
     </thead>
     <tbody>
