@@ -30,4 +30,26 @@ export const addTodo = async (todo: ITask): Promise<ITask> => {
     }
 };
 
+export const editTodo = async (todo: ITask): Promise<ITask> => {
+    try {
+        const res = await fetch(`${baseUrl}/tasks/${todo.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(todo),
+        });
+
+        if (!res.ok) {
+            throw new Error(`Failed to fetch. Status code: ${res.status}`);
+        }
+
+        const updatedTodo = await res.json();
+        return updatedTodo;
+    } catch (error) {
+        console.error("Error in addTodo:", error);
+        throw error; // Rethrow the error for further handling
+    }
+};
+
 
