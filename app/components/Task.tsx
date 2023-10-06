@@ -18,6 +18,7 @@ const Task: React.FC<TaskProps> = ({task}) => {
     const [openModalEdit, setopenModalEdit] = useState<boolean>(false);
     const [openModalDelete, setopenModalDelete] = useState<boolean>(false);
     const [taskToEdit, settaskToEdit] = useState(task.text);
+    const [isChecked, setIsChecked] = useState(false);
 
     const handleSubmitEditTodo: FormEventHandler<HTMLFormElement> = async (e)=>{
       e.preventDefault();
@@ -37,15 +38,19 @@ const Task: React.FC<TaskProps> = ({task}) => {
       router.refresh();
     } 
 
+    const handleCheckboxChange = () => {
+      setIsChecked(!isChecked);
+    };
+
   return (
     <tr className="hover" key={task.id}>
             <th>
             <label>
-                <input type="checkbox" className="checkbox" />
+                <input type="checkbox" className="checkbox ${isChecked ? 'line-through' : ''}" checked={isChecked} onChange={handleCheckboxChange} />
             </label>
             </th>
             <th>{task.id}</th>
-            <td className='w-full'>{task.text}</td>
+            <td className={`w-full ${isChecked ? 'line-through' : ''}`}>{task.text}</td>
             <td className='flex gap-10'>
               <FiEdit onClick={()=>setopenModalEdit(true)}  className='text-blue-400 rounded-lg border-spacing-6 hover:bg-slate-500 hover:text-black hover:border-spacing-6 ' cursor='pointer' size={25}/>
               <Modal modalOpen={openModalEdit} setmodalOpen={setopenModalEdit}>
