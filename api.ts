@@ -52,4 +52,26 @@ export const editTodo = async (todo: ITask): Promise<ITask> => {
     }
 };
 
+export const deleteTodo = async (todo: ITask): Promise<ITask> => {
+    try {
+        const res = await fetch(`${baseUrl}/tasks/${todo.id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(todo),
+        });
+
+        if (!res.ok) {
+            throw new Error(`Failed to fetch. Status code: ${res.status}`);
+        }
+
+        const deletedTodo = await res.json();
+        return deletedTodo;
+    } catch (error) {
+        console.error("Error in addTodo:", error);
+        throw error; // Rethrow the error for further handling
+    }
+};
+
 
