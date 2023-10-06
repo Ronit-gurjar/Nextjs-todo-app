@@ -14,9 +14,11 @@ const Task: React.FC<TaskProps> = ({task}) => {
     const [openModalEdit, setopenModalEdit] = useState<boolean>(false);
     const [openModalDelete, setopenModalDelete] = useState<boolean>(false);
     const [taskToEdit, settaskToEdit] = useState(task.text);
+    const [taskToDelete, settaskToDelete] = useState(task.text);
 
     const handleSubmitEditTodo = () => {}
-  
+    const handleSubmitDeleteTodo = () => {} 
+
   return (
     <tr className="hover" key={task.id}>
             <th>
@@ -30,14 +32,23 @@ const Task: React.FC<TaskProps> = ({task}) => {
               <FiEdit onClick={()=>setopenModalEdit(true)}  className='text-blue-400 rounded-lg border-spacing-6 hover:bg-slate-500 hover:text-black hover:border-spacing-6 ' cursor='pointer' size={25}/>
               <Modal modalOpen={openModalEdit} setmodalOpen={setopenModalEdit}>
               <form onSubmit={handleSubmitEditTodo} method="dialog">
-                <h3 className="font-bold text-lg">Create task</h3>
+                <h3 className="font-bold text-lg">Edit task</h3>
                 <div className="modal-action">
                 <input value={taskToEdit} onChange={(e)=> settaskToEdit(e.target.value)} type="text" placeholder="Type here" className="input input-bordered input-primary w-full" />
-                <button type="submit" className='btn btn-primary'>Submit</button>
+                <button type="submit" className='btn btn-primary'>Save</button>
                 </div>
               </form>
               </Modal>
-              <GoTrash className='text-red-600 rounded-lg border-spacing-6 hover:bg-red-700 hover:text-black hover:border-spacing-6' cursor='pointer' size={25}/>
+              <GoTrash onClick={()=>setopenModalDelete(true)}  className='text-red-600 rounded-lg border-spacing-6 hover:bg-red-700 hover:text-black hover:border-spacing-6' cursor='pointer' size={25}/>
+              <Modal modalOpen={openModalDelete} setmodalOpen={setopenModalDelete}>
+              <form onSubmit={handleSubmitDeleteTodo} method="dialog">
+                <h3 className="font-bold text-lg">Delete task</h3>
+                <div className="modal-action">
+                <input value={taskToDelete} onChange={(e)=> settaskToDelete(e.target.value)} type="text" placeholder="Type here" className="input input-bordered input-primary w-full" />
+                <button type="submit" className='btn btn-error'>Confirm</button>
+                </div>
+              </form>
+              </Modal>
             </td>
       </tr>
   )
